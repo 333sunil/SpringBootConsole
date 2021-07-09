@@ -21,12 +21,12 @@ pipeline {
         		} 
         	}
             steps {
-                sh 'gradlew build -x test'
+                sh 'gradle build -x test'
             }
         }
         stage("Test") {
             steps {
-                sh 'gradlew check'
+                sh 'gradle check'
             }
             post {
                 always {
