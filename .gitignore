@@ -1,0 +1,10 @@
+*.class
+/.gradle/
+/.classpath
+/.project
+/.settings/
+/build/
+/bin/
+MANIFEST.MF
+/.idea/
+/out/
