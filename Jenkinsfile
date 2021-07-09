@@ -32,13 +32,13 @@ pipeline {
 			stages {
 				stage('Build Docker Image') {
 				    steps {
-				    	sh 'docker build -t SpringConsole:0.1 -f Dockerfile .'
+				    	sh 'docker build -t springconsole:0.1 -f Dockerfile .'
 				    }
 				}
 				stage('Test Docker Image') {
 					agent { 
 						docker { 
-							image 'SpringConsole:0.1'
+							image 'springconsole:0.1'
 						} 
 					}
 				    steps {
