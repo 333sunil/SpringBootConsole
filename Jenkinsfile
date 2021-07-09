@@ -16,7 +16,8 @@ pipeline {
         stage("Docker Build and Test") {
         	agent { 
         		docker { 
-        			image 'gradle:jdk8' 
+        			image 'gradle:jdk8'
+        			reuseNode true
         		} 
         	}
         	stages {
@@ -28,13 +29,18 @@ pipeline {
         	}
         }
         stage("Containerize") {
-        	agent { 
-        		dockerfile {
-        			filename 'Dockerfile'
-        		} 
-        	}
 			stages {
-				stage('Test Docker') {
+				stage('Build Docker Image') {
+				    steps {
+				    	sh 'docker build -t SpringConsole:0.1 -f Dockerfile .'
+				    }
+				}
+				stage('Test Docker Image') {
+					agent { 
+						docker { 
+							image 'SpringConsole:0.1'
+						} 
+					}
 				    steps {
 				        sh 'java -version'
 				        sh 'java -jar SpringBootConsole.jar arg1'
