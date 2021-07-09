@@ -43,7 +43,7 @@ pipeline {
 					}
 				    steps {
 				        sh 'java -version'
-				        sh 'java -jar SpringBootConsole.jar arg1'
+				        sh 'java -jar /app/SpringBootConsole.jar arg1'
 				    }
 				}
 			}
