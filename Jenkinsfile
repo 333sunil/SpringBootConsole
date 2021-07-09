@@ -11,17 +11,22 @@ pipeline {
             steps {
                 deleteDir()
                 checkout scm
-                sh 'chmod +x gradlew'
             }
         }
         stage("Build") {
+        	agent { 
+        		docker { 
+        			image 'gradle:jdk8' 
+        			reuseNode true
+        		} 
+        	}
             steps {
-                sh './gradlew build -x test'
+                sh 'gradlew build -x test'
             }
         }
         stage("Test") {
             steps {
-                sh './gradlew check'
+                sh 'gradlew check'
             }
             post {
                 always {
