@@ -17,19 +17,22 @@ pipeline {
         	agent { 
         		docker { 
         			image 'gradle:jdk8' 
-        			reuseNode true
         		} 
         	}
         	stages {
         		stage("Build") {
         			steps {
-				        sh 'gradle build -x test'
+				        sh 'gradle build'
 				    }
         		}
         	}
         }
         stage("Containerize") {
-        	agent { dockerfile true }
+        	agent { 
+        		dockerfile {
+        			filename 'Dockerfile'
+        		} 
+        	}
 			stages {
 				stage('Test Docker') {
 				    steps {
