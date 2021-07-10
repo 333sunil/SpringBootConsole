@@ -24,7 +24,7 @@ pipeline {
         	stages {
         		stage("Build") {
         			steps {
-				        sh './gradlew build --no-daemon'
+				        sh 'gradle build --no-daemon'
 				    }
         		}
         	}
@@ -49,7 +49,7 @@ pipeline {
 					}
 				    steps {
 				        sh 'java -version'
-				        sh 'springbootconsole arg1'
+				        sh 'springbootconsole.sh arg1'
 				    }
 				}
 			}
