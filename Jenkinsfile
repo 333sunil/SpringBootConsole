@@ -23,9 +23,14 @@ pipeline {
         	stages {
         		stage("Build") {
         			steps {
-				        sh 'gradle build'
+				        sh 'gradle build --no-daemon'
 				    }
         		}
+        	}
+        	post {
+        		failure {
+				    sh 'exit 1'
+				}
         	}
         }
         stage("Containerize") {

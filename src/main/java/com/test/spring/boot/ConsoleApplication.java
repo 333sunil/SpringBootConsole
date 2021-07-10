@@ -11,6 +11,9 @@ public class ConsoleApplication implements CommandLineRunner {
     @Autowired
     private HelloService helloService;
 
+    @Autowired
+    private URLService urlService;
+
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(ConsoleApplication.class);
         app.run(args);
@@ -22,6 +25,11 @@ public class ConsoleApplication implements CommandLineRunner {
             System.out.println(helloService.getMessage(args[0]));
         } else {
             System.out.println(helloService.getMessage());
+        }
+        try {
+            urlService.makeGetRequest();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

@@ -16,5 +16,15 @@ repositories {
 dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.6'
     annotationProcessor 'org.projectlombok:lombok:1.18.6'
+    compile 'org.apache.httpcomponents:httpclient:4.3.4'
     implementation 'org.springframework.boot:spring-boot-starter'
+}
+
+jar {
+    manifest {
+        attributes (
+                'Main-Class': 'com.test.spring.boot.ConsoleApplication'
+        )
+    }
+    from configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
 }
