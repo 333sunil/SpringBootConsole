@@ -11,19 +11,20 @@ pipeline {
             steps {
                 deleteDir()
                 checkout scm
+                sh 'chmod +x gradlew'
             }
         }
         stage("Docker Build and Test") {
         	agent { 
         		docker { 
-        			image 'gradle:jdk8'
+        			image 'gradle:6.3.0-jdk8'
         			reuseNode true
         		} 
         	}
         	stages {
         		stage("Build") {
         			steps {
-				        sh 'gradle build --no-daemon'
+				        sh './gradlew build --no-daemon'
 				    }
         		}
         	}
@@ -48,7 +49,7 @@ pipeline {
 					}
 				    steps {
 				        sh 'java -version'
-				        sh 'java -jar /app/SpringBootConsole.jar arg1'
+				        sh 'springbootconsole arg1'
 				    }
 				}
 			}
